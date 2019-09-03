@@ -15,6 +15,7 @@ public class Config {
 	public static int CThread_num;//生成缓存的线程数
 	public static int UThread_num;//上传更新文件的线程数
 	
+	public static List<String> bucket_list;
 	public static List<String> included_suffix;
 	public static List<String> local_path_list;
 	public static String endpoint,accessKeyId,accessKeySecret,bucket_name;
@@ -35,6 +36,8 @@ public class Config {
 			e.printStackTrace();
 		}
         JSONObject config = JSON.parseObject(config_str);
+        bucket_list=((JSONArray) config.get("bucket_list"))
+        		.toJavaList(String.class);
         included_suffix=((JSONArray) config.get("include_suffix"))
         		.toJavaList(String.class);
         local_path_list=((JSONArray) config.get("local_path_list"))

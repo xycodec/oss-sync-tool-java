@@ -109,6 +109,7 @@ public class OSSInteract {
 	    System.out.println("* input cfg bucket:  configure oss2-bucket-name.              *");
 	    System.out.println("* input restore:  restore (suffix) to the original state.     *");
 	    System.out.println("* input clear:  clear all temp files.                         *");
+	    System.out.println("* input show buckets:  show available bucket name.            *");
 	    System.out.println("* input show info:  set up display help information or not.   *");
 	    System.out.println("* input help:  show the help information.                     *");
 	    System.out.println("* input q:  exit the program.                                 *");
@@ -155,6 +156,11 @@ public class OSSInteract {
 		}else if(op.equals("q")||op.equals("quit")||op.equals("exit")) {
 			MyOSSUtils.shutdown();
 			return;
+		}else if(op.equals("show buckets")) {
+			for(String item:Config.bucket_list) {
+				System.out.println(item);
+			}
+			interact();
 		}else if(op.length()==0) {
 			interact();
 		}else {
