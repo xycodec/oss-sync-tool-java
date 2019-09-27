@@ -33,7 +33,7 @@ public class FileScan{
 					//递归扫描下面的文件夹
 					String[] tmp=filepath.split("/");
 					if(tmp[tmp.length-1].charAt(0)!='.')//.开头的文件夹多半是缓存与配置文件夹,故不去扫描它
-						result.addAll(scan(filepath));//这里尤其注意，要不子任务的结果添加进来
+						result.addAll(scan(filepath));//这里尤其注意，要将子任务的结果添加进来
 				}else{
 					if(Config.included_suffix.contains(MyFileUtils.getSuffix(filepath).toLowerCase())) {
 						result.add(new File(filepath));
