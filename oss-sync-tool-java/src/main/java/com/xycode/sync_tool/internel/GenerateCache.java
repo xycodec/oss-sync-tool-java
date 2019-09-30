@@ -53,8 +53,8 @@ public class GenerateCache implements Runnable{
 				String filepath=MyFileUtils.format(cache_file_list.get(i).toString());
 				File dir=new File(filepath.substring(0, filepath.lastIndexOf('/')+1));
 				boolean exists=false;
+				read_lock.lock();
 				try {
-					read_lock.lock();
 					exists=dir.exists();
 				}finally {
 					read_lock.unlock();
@@ -62,8 +62,8 @@ public class GenerateCache implements Runnable{
 				if(!exists) {//不存在则创建
 					//两种创建文件夹的方法,注意方法名后面有s,可以一次性创建多个嵌套的文件夹
 					boolean flag=false;
+					write_lock.lock();
 					try {
-						write_lock.lock();
 						flag=dir.mkdirs();//写入的过程,不可以被其他正在mkdirs或读取exist状态的线程打断
 					}finally {
 						write_lock.unlock();
