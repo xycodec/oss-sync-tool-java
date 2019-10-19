@@ -2,7 +2,6 @@ package com.xycode.sync_tool.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.FileSystemNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -11,12 +10,10 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.http.impl.entity.DisallowIdentityContentLengthStrategy;
 
 import com.xycode.sync_tool.config.Config;
 import com.xycode.sync_tool.internel.FileScan;
 import com.xycode.sync_tool.internel.GenerateCache;
-import com.xycode.sync_tool.internel.OSSUpdater;
 
 public class MyFileUtils {
 	
@@ -104,7 +101,7 @@ public class MyFileUtils {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally {
-			GenerateCache.latch=new CountDownLatch(Config.CThread_num);
+			GenerateCache.latch=new CountDownLatch(Config.UThread_num);
 		}
 	}
 	

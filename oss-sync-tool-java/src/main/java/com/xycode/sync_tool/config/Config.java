@@ -26,6 +26,7 @@ public class Config {
 		init();
 	}
 	
+	//硬解析,也可以对应到Java对象解析
 	private static void init() {
         InputStream inputStream = null;
         String config_str=null;
