@@ -1,59 +1,79 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+	<!--包名的设置-->
+	  <groupId>com.xycode</groupId>
+	  <artifactId>oss_sync_tool</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
+	  <packaging>jar</packaging>
 
-  <groupId>com.xycode</groupId>
-  <artifactId>oss_sync_tool</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	  <name>sync_tool</name>
+	  <url>http://maven.apache.org</url>
 
-  <name>sync_tool</name>
-  <url>http://maven.apache.org</url>
+	<!--一些属性设置,这里设置工程的默认编码为UTF-8-->
+	  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	  </properties>
+	<!--设置工程的jdk版本为1.8-->
+      <profiles>
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
 
-<build>
- <plugins>
-     <plugin>
-        <!-- Building an executable jar -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-		<version>3.1.1</version> 
-        <configuration>
-          <archive>
-            <manifest>
-            <!-- give full qualified name of your main class-->
-              <mainClass>com.xycode.sync_tool.Main</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-    </plugin>
- </plugins>
-</build>
-
-
-  <dependencies>
-    	<dependency>
-	    <groupId>com.aliyun.oss</groupId>
-	    <artifactId>aliyun-sdk-oss</artifactId>
-	    <version>3.5.0</version>
-	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-	<dependency>
-	    <groupId>com.alibaba</groupId>
-	    <artifactId>fastjson</artifactId>
-	    <version>1.2.58</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.6</version>
-	</dependency>
-	
-  </dependencies>
+	<build>
+	 <plugins>
+		 <plugin>
+			<groupId>org.codehaus.mojo</groupId>  
+			<artifactId>exec-maven-plugin</artifactId>  
+			<version>1.6.0</version>  
+			
+			<!--配置使用mvn exec:java 来启动工程,在下面指定了执行的主类-->
+			<executions>  
+				<execution>  
+					<goals>  
+						<goal>java</goal>  
+					</goals>  
+				</execution>  
+			</executions>  		
+			<configuration>
+				<mainClass>com.xycode.sync_tool.Main</mainClass>
+			</configuration>
+		</plugin>
+	 </plugins>
+	</build>
+
+	<!--依赖的jar包-->
+	<dependencies>
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.60</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+	</dependencies>
 </project>
 
